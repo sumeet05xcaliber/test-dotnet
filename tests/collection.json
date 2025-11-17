@@ -12,117 +12,248 @@
         "method": "GET",
         "url": "{{baseUrl}}/"
       },
-      "response": []
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"GET / should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Weather",
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/weatherforecast"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"GET /weatherforecast should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Health",
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/health"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"GET /health should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Info",
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/info"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"GET /info should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Products - GET All",
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/api/products"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"GET products should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
-      "name": "Products - GET by ID (existing)",
+      "name": "Products - GET by ID",
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/api/products/1"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"GET product 1 should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Products - CREATE (POST)",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
         "body": {
           "mode": "raw",
           "raw": "{\n  \"id\": 10,\n  \"name\": \"Headphones\",\n  \"price\": 150\n}"
         },
         "url": "{{baseUrl}}/api/products"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"POST product should return 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Products - UPDATE (PUT)",
       "request": {
         "method": "PUT",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
         "body": {
           "mode": "raw",
           "raw": "{\n  \"id\": 10,\n  \"name\": \"Headphones Pro\",\n  \"price\": 200\n}"
         },
         "url": "{{baseUrl}}/api/products/10"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"PUT product should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Products - DELETE",
       "request": {
         "method": "DELETE",
         "url": "{{baseUrl}}/api/products/10"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"DELETE product should return 204\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Orders - GET All",
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/api/orders"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"GET orders should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "Orders - CREATE (POST)",
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
         "body": {
           "mode": "raw",
           "raw": "{\n  \"id\": 99,\n  \"productId\": 1,\n  \"quantity\": 2\n}"
         },
         "url": "{{baseUrl}}/api/orders"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"POST order should return 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});"
+            ]
+          }
+        }
+      ]
     },
     {
-      "name": "Orders - GET by ID (existing after POST)",
+      "name": "Orders - GET by ID",
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/api/orders/99"
-      }
-    }
-  ],
-  "event": [
-    {
-      "listen": "prerequest",
-      "script": {
-        "exec": []
-      }
-    },
-    {
-      "listen": "test",
-      "script": {
-        "exec": [
-          "pm.test(\"Status code is valid\", function () {",
-          "    pm.response.to.have.status.pm.response.code;",
-          "});"
-        ]
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"GET order 99 should return 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
     }
   ],
   "variable": [
