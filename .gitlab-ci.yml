@@ -1,0 +1,42 @@
+image: mcr.microsoft.com/dotnet/sdk:8.0
+
+variables:
+  BASE_URL: "http://localhost:5000"
+
+stages:
+  - test
+
+api_tests:
+  stage: test
+  only:
+    - merge_requests
+
+  script:
+    # Install needed tools
+    - apt-get update && apt-get install -y curl nodejs npm
+
+    # Restore + build backend
+    - dotnet restore
+    - dotnet build -c Release
+
+    # Run backend in background
+    - dotnet run -c Release &
+    - BACKEND_PID=$!
+
+    # Wait for API to start (simple wait)
+    - sleep 10
+
+    # Download Swagger
+    - curl "$BASE_URL/swagger/v1/swagger.json" -o swagger.json
+
+    # Generate Postman collection
+    - npx openapi-to-postmanv2 -s swagger.json -o collection.json -p
+
+    # Install Newman
+    - npm install -g newman
+
+    # Run all API tests
+    - newman run collection.json --env-var baseUrl=$BASE_URL
+
+  after_script:
+    - kill $BACKEND_PID || true
