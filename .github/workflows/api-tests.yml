@@ -30,14 +30,8 @@ jobs:
           nohup dotnet run -c Release &
           sleep 15
 
-      - name: Download Swagger
-        run: curl http://localhost:5280/swagger/v1/swagger.json -o swagger.json
-
-      - name: Generate Postman Collection
-        run: npx openapi-to-postmanv2 -s swagger.json -o collection.json -p
-
       - name: Install Newman
         run: npm install -g newman
 
       - name: Run API Tests
-        run: newman run collection.json --env-var baseUrl=http://localhost:5280
+        run: newman run tests/collection.json --env-var baseUrl=http://localhost:5280

@@ -1,0 +1,134 @@
+{
+  "info": {
+    "name": "TestDotnetApi",
+    "_postman_id": "b1e5141b-f9e0-4560-b345-dcc34e7f2f00",
+    "description": "Complete Postman collection for TestDotnetApi with GET, POST, PUT, DELETE",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Root",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/"
+      },
+      "response": []
+    },
+    {
+      "name": "Weather",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/weatherforecast"
+      }
+    },
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health"
+      }
+    },
+    {
+      "name": "Info",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/info"
+      }
+    },
+    {
+      "name": "Products - GET All",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products"
+      }
+    },
+    {
+      "name": "Products - GET by ID (existing)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/products/1"
+      }
+    },
+    {
+      "name": "Products - CREATE (POST)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 10,\n  \"name\": \"Headphones\",\n  \"price\": 150\n}"
+        },
+        "url": "{{baseUrl}}/api/products"
+      }
+    },
+    {
+      "name": "Products - UPDATE (PUT)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 10,\n  \"name\": \"Headphones Pro\",\n  \"price\": 200\n}"
+        },
+        "url": "{{baseUrl}}/api/products/10"
+      }
+    },
+    {
+      "name": "Products - DELETE",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/products/10"
+      }
+    },
+    {
+      "name": "Orders - GET All",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/orders"
+      }
+    },
+    {
+      "name": "Orders - CREATE (POST)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": 99,\n  \"productId\": 1,\n  \"quantity\": 2\n}"
+        },
+        "url": "{{baseUrl}}/api/orders"
+      }
+    },
+    {
+      "name": "Orders - GET by ID (existing after POST)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/orders/99"
+      }
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": []
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "exec": [
+          "pm.test(\"Status code is valid\", function () {",
+          "    pm.response.to.have.status.pm.response.code;",
+          "});"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5280"
+    }
+  ]
+}
